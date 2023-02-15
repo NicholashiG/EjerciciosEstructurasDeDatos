@@ -1,4 +1,4 @@
-package logica;
+package MetodosInstanciados;
 
 public class Ejercicio4 {
 

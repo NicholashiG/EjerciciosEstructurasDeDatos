@@ -1,4 +1,4 @@
-package logica;
+package MetodosInstanciados;
 
 import javax.swing.JOptionPane;
 

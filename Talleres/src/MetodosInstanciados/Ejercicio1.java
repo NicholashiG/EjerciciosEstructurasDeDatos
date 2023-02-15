@@ -1,6 +1,4 @@
-package logica;
-
-import java.util.Iterator;
+package MetodosInstanciados;
 
 public class Ejercicio1 {
 

@@ -1,5 +1,7 @@
 package MetodosInstanciados;
 
+import Utilidades.Utils;
+
 public class Ejercicio1 {
 
 	/*

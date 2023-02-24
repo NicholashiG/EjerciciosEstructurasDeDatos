@@ -3,53 +3,37 @@ package MetodosRecursivosFinal;
 import Utilidades.Utils;
 
 public class Ejercicio4 {
-    
-    // Nota: revisarlo >w<
 
-    /*
-     * Enunciado:
-     * Escribir un método recursivo que implemente el algoritmo para determinar si una palabra o frase es palíndroma o no.
-     * El método debe ignorar espacios y puntuación en la cadena.
-     */
     public static void main(String[] args) {
-        String palabra = Utils.pedirTexto("Ingrese la palabra o frase para saber si es palíndroma");
-        Utils.mostrarMensaje("¿La palabra o frase '" + palabra + "' es palíndroma?: " + isPalindroma(palabra));
+        String cadena = Utils.pedirTexto("Inserte el texto para saber si es la palíndroma");
+        String cadenaModificada = cadena.replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
+        String cadenaVolteada = voltearCadena(cadenaModificada, 0, cadenaModificada.length());
+        if (esPalindroma(cadenaModificada, cadenaVolteada, 0, 0) != cadenaVolteada.length()) {
+            Utils.mostrarMensaje("La palabra " +cadena+" no es palindroma");
+        } else {
+            Utils.mostrarMensaje("La palabra " +cadena+" es palindroma");
+        }
     }
 
-    public static String invertirPalabra(String palabra, int i) {
-        if (i >= 0)  {
-            if (palabra.charAt(i) != ' ' || palabra.charAt(i) != '.' || palabra.charAt(i) != ','){
-                return "" + palabra.charAt(i) + invertirPalabra(palabra, i - 1);
-            }
-            else{
-                return invertirPalabra(palabra, i - 1);
-            }
+    public static String voltearCadena(String cadenaModificada, int i, int j) {
+        if (i < cadenaModificada.length() + 1 && j > 0) {
+            return cadenaModificada.charAt(j - 1) + voltearCadena(cadenaModificada, i + 1, j - 1);
         }
         return "";
     }
 
-    public static int cantSignos(String palabra, int i ){
-        if (i >= 0) {
-            if (palabra.charAt(i) == ' ' || palabra.charAt(i) == '.' || palabra.charAt(i) == ','){
-                return 1 + cantSignos(palabra, i - 1);
-            }
-            else{
-                return cantSignos(palabra, i - 1);
+    public static int esPalindroma(String cadenaOriginal, String cadenaVolteada, int i, int j) {
+        if (i < cadenaOriginal.length()) {
+            if (cadenaOriginal != " " || cadenaOriginal != "." || cadenaOriginal != ",") {
+                if (cadenaOriginal.charAt(i) == cadenaVolteada.charAt(j)) {
+                    return esPalindroma(cadenaOriginal, cadenaVolteada, i + 1, j + 1) + 1;
+                } else {
+                    return 0;
+                }
+            } else {
+                return esPalindroma(cadenaOriginal, cadenaVolteada, i, j);
             }
         }
         return 0;
     }
-
-    public static boolean isPalindroma(String palabra) {
-        int cantidadSignos = cantSignos(palabra, palabra.length()-1);
-        System.out.println(cantidadSignos);
-        String palabraInvertida = invertirPalabra(palabra.toLowerCase(), palabra.length()-1 - cantidadSignos);
-        System.out.println(palabraInvertida);
-        if (palabra.toLowerCase().equals(palabraInvertida)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }
